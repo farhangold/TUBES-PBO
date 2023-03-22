@@ -5,4 +5,6 @@ module com.example.pbo {
 
     opens com.example.pbo to javafx.fxml;
     exports com.example.pbo;
+    exports com.example.pbo.controllers;
+    opens com.example.pbo.controllers to javafx.fxml;
 }
