@@ -6,8 +6,8 @@ module com.example.pbo {
     requires mysql.connector.j;
 
 
-    opens com.example.jafafxlearn to javafx.fxml;
-    exports com.example.jafafxlearn;
-    exports com.example.jafafxlearn.controller;
-    opens com.example.jafafxlearn.controller to javafx.fxml;
+    opens com.example.pbo to javafx.fxml;
+    exports com.example.pbo;
+    exports com.example.pbo.controllers;
+    opens com.example.pbo.controller to javafx.fxml;
 }

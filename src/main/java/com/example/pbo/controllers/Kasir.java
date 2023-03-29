@@ -6,4 +6,5 @@ public interface Kasir {
 
     Pengemudi getPengemudiByPlatNomor();
     void getTotalBayar(String plat,String jenisKendaraan);
+    void getNoTransaksi(String notransaksi);
 }

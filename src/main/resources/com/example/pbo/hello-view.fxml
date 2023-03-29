@@ -5,10 +5,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:controller="com.example.pbo.controllers.LoginController" fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pbo.controllers.LoginController">
    <right>
       <AnchorPane prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #DCDCDC;" BorderPane.alignment="CENTER">
          <children>
+            <Label fx:id="ouput" layoutX="135.0" layoutY="188.0" />
             <Button fx:id="btnLogin" layoutX="31.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnLoginAction" prefHeight="30.0" prefWidth="235.0" text="Login">
                <font>
                   <Font name="Arial" size="12.0" />
@@ -21,7 +22,6 @@
                <font>
                   <Font name="Arial" size="12.0" />
                </font></TextField>
-            <Label fx:id="ouput" text="Label" />
          </children></AnchorPane>
    </right>
    <center>
