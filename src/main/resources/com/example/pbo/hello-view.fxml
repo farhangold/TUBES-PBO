@@ -9,7 +9,7 @@
    <right>
       <AnchorPane prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #DCDCDC;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="ouput" layoutX="135.0" layoutY="188.0" />
+            <Label fx:id="ouput" alignment="CENTER" layoutX="135.0" layoutY="188.0" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
             <Button fx:id="btnLogin" layoutX="31.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnLoginAction" prefHeight="30.0" prefWidth="235.0" text="Login">
                <font>
                   <Font name="Arial" size="12.0" />

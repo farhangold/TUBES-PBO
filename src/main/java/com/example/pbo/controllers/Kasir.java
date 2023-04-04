@@ -4,7 +4,7 @@ import com.example.pbo.model.Pengemudi;
 
 public interface Kasir {
 
-    Pengemudi getPengemudiByPlatNomor();
-    void getTotalBayar(String plat,String jenisKendaraan);
-    void getNoTransaksi(String notransaksi);
+    public Pengemudi getPengemudiByPlatNomor();
+    public double getTotalBayar(String plat,String jenisKendaraan);
+    public  String getNoTransaksi(String notransaksi);
 }

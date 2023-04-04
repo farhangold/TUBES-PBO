@@ -51,14 +51,13 @@ public class LoginController implements Initializable {
             ResultSet queryResult = statement.executeQuery(query);
             while (queryResult.next()){
                 if (queryResult.getInt(1) == 1){
-//                    mywindow = ouput.getScene().getWindow();
-//                    Parent root = FXMLLoader.load(getClass().getResource("/side-nav.fxml"));
-//                    Stage stage = (Stage) mywindow;
-//                    stage.setTitle("KPI SYSTEM");
-//                    stage.setScene(new Scene(root,1000,700));
-//                    //stage.setResizable(false);
-//                    stage.show();
-                    ouput.setText("success");
+                    mywindow = ouput.getScene().getWindow();
+                    Parent root = FXMLLoader.load(getClass().getResource("/Dashboard.fxml"));
+                    Stage stage = (Stage) mywindow;
+                    stage.setTitle("Dashboard");
+                    stage.setScene(new Scene(root,700,500));
+                    //stage.setResizable(false);
+                    stage.show();
                 }else{
                     ouput.setText("Invalid login, please try again");
                 }
