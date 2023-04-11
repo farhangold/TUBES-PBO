@@ -1,4 +1,4 @@
-package com.example.pbo.controllers;
+package com.example.pbo.interfaces;
 
 import com.example.pbo.model.Pengemudi;
 

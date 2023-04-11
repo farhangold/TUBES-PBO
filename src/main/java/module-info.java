@@ -10,4 +10,6 @@ module com.example.pbo {
     exports com.example.pbo;
     exports com.example.pbo.controllers;
     opens com.example.pbo.controllers to javafx.fxml;
+    exports com.example.pbo.interfaces;
+    opens com.example.pbo.interfaces to javafx.fxml;
 }

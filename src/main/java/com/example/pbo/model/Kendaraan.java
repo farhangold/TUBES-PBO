@@ -1,6 +1,6 @@
 package com.example.pbo.model;
 
-public abstract  class Kendaraan implements com.example.pbo.controllers.Kendaraan {
+public abstract  class Kendaraan{
     public String nama;
     public int berat;
     public double harga;

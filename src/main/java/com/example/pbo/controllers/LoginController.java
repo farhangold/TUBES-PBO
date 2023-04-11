@@ -23,15 +23,10 @@ public class LoginController implements Initializable {
     private TextField tfPassword,tfUsername;
     @FXML
     private Label ouput;
-
     private Window mywindow;
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
-
     public void btnLoginAction(ActionEvent actionEvent) {
         if(tfUsername.getText().equals("")){
             ouput.setText("Username harus di isi!");
@@ -41,7 +36,6 @@ public class LoginController implements Initializable {
             validateLogin(actionEvent);
         }
     }
-
     private void validateLogin(ActionEvent event) {
         DatabaseConnection db = new DatabaseConnection();
         Connection connection = db.getConnection();

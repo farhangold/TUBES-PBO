@@ -8,8 +8,9 @@ public class Bus extends Kendaraan{
 
     @Override
     public void setBerat(int berat) {
-        this.berat = berat;
+        this.berat =berat;
     }
+
     @Override
     public int getBerat() {
         return this.berat;

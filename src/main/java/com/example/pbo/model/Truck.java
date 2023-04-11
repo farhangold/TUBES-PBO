@@ -4,6 +4,7 @@ public class Truck extends Kendaraan{
 
     public Truck(String nama) {
         super(nama);
+        this.harga = 8000;
     }
 
     @Override
