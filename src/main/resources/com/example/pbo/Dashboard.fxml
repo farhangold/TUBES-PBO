@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="400.0" prefWidth="178.0" style="-fx-background-color: #596D64; -fx-border-radius: 10px; -fx-border-color: #ccc; -fx-border-width: 1px;">
+      <VBox prefHeight="500.0" prefWidth="178.0" style="-fx-background-color: #596D64; -fx-border-radius: 10px; -fx-border-color: #ccc; -fx-border-width: 1px;">
          <children>
             <StackPane prefHeight="108.0" prefWidth="150.0">
                <children>
