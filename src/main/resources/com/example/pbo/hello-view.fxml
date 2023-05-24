@@ -5,19 +5,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pbo.HelloController">
+<BorderPane fx:id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pbo.controllers.LoginController">
    <right>
       <AnchorPane prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #DCDCDC;" BorderPane.alignment="CENTER">
          <children>
+            <Label fx:id="ouput" alignment="CENTER" layoutX="135.0" layoutY="188.0" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
             <Button fx:id="btnLogin" layoutX="31.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnLoginAction" prefHeight="30.0" prefWidth="235.0" text="Login">
                <font>
                   <Font name="Arial" size="12.0" />
                </font></Button>
-            <TextField fx:id="Inputusrname" layoutX="31.0" layoutY="258.0" prefHeight="30.0" prefWidth="235.0" promptText="Password">
+            <TextField fx:id="tfPassword" layoutX="31.0" layoutY="258.0" prefHeight="30.0" prefWidth="235.0" promptText="Password">
                <font>
                   <Font name="Arial" size="12.0" />
                </font></TextField>
-            <TextField fx:id="InputpwdLogin" layoutX="31.0" layoutY="219.0" prefHeight="30.0" prefWidth="235.0" promptText="Username">
+            <TextField fx:id="tfUsername" layoutX="31.0" layoutY="219.0" prefHeight="30.0" prefWidth="235.0" promptText="Username">
                <font>
                   <Font name="Arial" size="12.0" />
                </font></TextField>
