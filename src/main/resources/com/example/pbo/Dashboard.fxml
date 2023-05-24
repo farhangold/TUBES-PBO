@@ -22,6 +22,10 @@
                   <font>
                      <Font name="System Bold" size="12.0" />
                   </font></Button>
+               <Button fx:id="btnKendaraan" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Tambah Kendaraan">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font></Button>
                <Button fx:id="btnSetting" mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: Transparant;" text="Setting">
                   <font>
                      <Font name="System Bold" size="12.0" />

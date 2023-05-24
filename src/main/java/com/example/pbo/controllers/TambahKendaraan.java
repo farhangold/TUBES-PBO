@@ -1,4 +1,4 @@
-package com.example.pbo;
+package com.example.pbo.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

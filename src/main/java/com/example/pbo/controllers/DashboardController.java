@@ -15,7 +15,7 @@ public class DashboardController implements Initializable{
     @FXML
     private TextField Platnomer;
     @FXML
-    private Button btnLoad,btnDashboard,btnSetting,btnExit;
+    private Button btnLoad,btnDashboard,btnSetting,btnExit,btnKendaraan;
     @FXML
     private TableView tabelKendaraan;
     @FXML
