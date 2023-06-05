@@ -22,7 +22,7 @@
                   <font>
                      <Font name="System Bold" size="12.0" />
                   </font></Button>
-               <Button fx:id="btnKendaraan" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Tambah Kendaraan">
+               <Button fx:id="btnKendaraan" onAction="#actionClickBtnTambahKendaraan" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: white;" text="Tambah Kendaraan">
                   <font>
                      <Font name="System Bold" size="12.0" />
                   </font></Button>

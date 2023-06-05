@@ -1,5 +1,6 @@
 package com.example.pbo;
 
+import com.example.pbo.controllers.TambahKendaraan;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

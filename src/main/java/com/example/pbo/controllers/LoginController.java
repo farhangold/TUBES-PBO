@@ -1,12 +1,14 @@
 package com.example.pbo.controllers;
 
 import DatabaseConnection.DatabaseConnection;
+import com.example.pbo.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -39,26 +41,34 @@ public class LoginController implements Initializable {
     private void validateLogin(ActionEvent event) {
         DatabaseConnection db = new DatabaseConnection();
         Connection connection = db.getConnection();
-        String query = "select count(1) from Kasir where username='"+ tfUsername.getText()+"' and password ='"+tfPassword.getText()+"'";
+        String query = "select count(1) from kasir where Username='"+ tfUsername.getText()+"' and Password ='"+tfPassword.getText()+"'";
         try{
             Statement statement = connection.createStatement();
             ResultSet queryResult = statement.executeQuery(query);
             while (queryResult.next()){
                 if (queryResult.getInt(1) == 1){
                     mywindow = ouput.getScene().getWindow();
-                    Parent root = FXMLLoader.load(getClass().getResource("/Dashboard.fxml"));
                     Stage stage = (Stage) mywindow;
-                    stage.setTitle("Dashboard");
-                    stage.setScene(new Scene(root,700,500));
-                    //stage.setResizable(false);
+                    FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Dashboard.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load(), 700, 500);
+                    stage.setTitle("Login Page");
+                    stage.setScene(scene);
                     stage.show();
+
                 }else{
-                    ouput.setText("Invalid login, please try again");
+                    showErrorMessage("Username/password salah");
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
             e.getCause();
         }
+    }
+    private void showErrorMessage(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -6,7 +6,6 @@ public class Pengemudi {
     private Kendaraan jenisKendaraan;
     private String PlatNomor;
     private LocalDateTime startParkir;
-    private Transaksi transaksi;
     //method
 
     public Pengemudi(String jenisKendaraan, String PlatNomor) {

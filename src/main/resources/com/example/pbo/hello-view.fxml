@@ -14,10 +14,10 @@
                <font>
                   <Font name="Arial" size="12.0" />
                </font></Button>
-            <TextField fx:id="tfPassword" layoutX="31.0" layoutY="258.0" prefHeight="30.0" prefWidth="235.0" promptText="Password">
+            <PasswordField fx:id="tfPassword" layoutX="31.0" layoutY="258.0" prefHeight="30.0" prefWidth="235.0" promptText="Password">
                <font>
                   <Font name="Arial" size="12.0" />
-               </font></TextField>
+               </font></PasswordField>
             <TextField fx:id="tfUsername" layoutX="31.0" layoutY="219.0" prefHeight="30.0" prefWidth="235.0" promptText="Username">
                <font>
                   <Font name="Arial" size="12.0" />
