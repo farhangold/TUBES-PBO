@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pbo.controllers.SettingsController">
     <children>
         <VBox prefHeight="500.0" prefWidth="178.0" style="-fx-background-color: #596D64; -fx-border-radius: 10px; -fx-border-color: #ccc; -fx-border-width: 1px;">
             <children>
@@ -19,6 +19,10 @@
                     </children>
                 </StackPane>
                 <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Dashboard">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button fx:id="btnKendaraan" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Tambah Kendaraan">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
@@ -37,11 +41,11 @@
                 <Font size="18.0" />
             </font>
         </Label>
-      <TextField layoutX="300.0" layoutY="99.0" />
+      <TextField fx:id="tfUsername" layoutX="300.0" layoutY="99.0" />
       <Label layoutX="211.0" layoutY="103.0" text="Username" />
       <Label layoutX="211.0" layoutY="144.0" text="Current Picture" />
-      <Label layoutX="300.0" layoutY="144.0" text="Label" />
+      <Label layoutX="300.0" layoutY="144.0" text="None" />
       <Label layoutX="212.0" layoutY="192.0" text="New Picture" />
-      <Button layoutX="302.0" layoutY="188.0" mnemonicParsing="false" text="Pilih Foto" />
+      <Button fx:id="btnPilihFoto" layoutX="302.0" layoutY="188.0" mnemonicParsing="false" text="Pilih Foto" />
     </children>
 </AnchorPane>
