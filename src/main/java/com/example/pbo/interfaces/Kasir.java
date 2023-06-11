@@ -1,10 +1,11 @@
 package com.example.pbo.interfaces;
 
-import com.example.pbo.model.Pengemudi;
+import com.example.pbo.model.Kendaraan;
+
+import java.sql.ResultSet;
 
 public interface Kasir {
 
-    public Pengemudi getPengemudiByPlatNomor();
-    public double getTotalBayar(String plat,String jenisKendaraan);
-    public  String getNoTransaksi(String notransaksi);
+    public ResultSet getPengemudiByPlatNomor();
+    public void tambah_data();
 }

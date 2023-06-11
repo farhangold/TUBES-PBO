@@ -51,7 +51,7 @@ public class LoginController implements Initializable {
                     Stage stage = (Stage) mywindow;
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Dashboard.fxml"));
                     Scene scene = new Scene(fxmlLoader.load(), 700, 500);
-                    stage.setTitle("Login Page");
+                    stage.setTitle("Dashboard");
                     stage.setScene(scene);
                     stage.show();
 

@@ -18,7 +18,7 @@
                         </ImageView>
                     </children>
                 </StackPane>
-                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Dashboard">
+                <Button mnemonicParsing="false" onAction="#ActionClickbtnDasboard" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Dashboard">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
@@ -36,7 +36,7 @@
                     </font></Button>
             </children>
         </VBox>
-        <Button fx:id="btnTambah" layoutX="560.0" layoutY="71.0" mnemonicParsing="false" onAction="#ActionClickbtnTambah" prefHeight="35.0" prefWidth="90.0" text="Tambah" />
+        <Button fx:id="btnTambah" onAction="#ActionClickbtnTambah" layoutX="560.0" layoutY="71.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="Tambah" />
 
         <Label layoutX="203.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Dashboard">
             <font>
@@ -46,13 +46,14 @@
         <TextField fx:id="TambahPlatNomer" alignment="CENTER" layoutX="203.0" layoutY="71.0" prefHeight="35.0" prefWidth="129.0" text="Plat Nomer" />
         <TextField fx:id="JenisKendaraan" alignment="CENTER" layoutX="343.0" layoutY="71.0" prefHeight="35.0" prefWidth="112.0" text="Kendaraan" />
         <DatePicker fx:id="DateTimePicker" layoutX="466.0" layoutY="71.0" prefHeight="35.0" prefWidth="84.0" promptText="DateTime" />
-        <TableView fx:id="dataTable" layoutX="204.0" layoutY="120.0" prefHeight="183.0" prefWidth="409.0">
+        <TableView fx:id="tabelKendaraan" layoutX="204.0" layoutY="120.0" prefHeight="183.0" prefWidth="409.0">
             <ScrollPane hbarPolicy="ALWAYS" prefHeight="200.0" prefWidth="364.0" />
             <columns>
                 <TableColumn fx:id="col1" prefWidth="100.20001220703125" text="Plat Kendaraan" />
-                <TableColumn fx:id="col2" prefWidth="112.39999389648438" text="Jenis Kendaraan" />
-                <TableColumn fx:id="col3" prefWidth="102.39996337890625" text="Date Time" />
-                <TableColumn fx:id="col4" prefWidth="91.20001220703125" text="Biaya" />
+                <TableColumn fx:id="col2" prefWidth="90.20001220703125" text="Jenis Kendaraan" />
+                <TableColumn fx:id="col3" prefWidth="90.20001220703125" text="Start Time" />
+                <TableColumn fx:id="col4" prefWidth="90.20001220703125" text="End Time" />
+                <TableColumn fx:id="col5" prefWidth="100.20001220703125" text="Biaya" />
             </columns>
         </TableView>
     </children>

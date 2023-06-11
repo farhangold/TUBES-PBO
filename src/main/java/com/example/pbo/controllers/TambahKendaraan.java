@@ -1,24 +1,28 @@
 package com.example.pbo.controllers;
 
 import DatabaseConnection.DatabaseConnection;
-import com.example.pbo.model.Pengemudi;
-import com.example.pbo.model.Transaksi;
+import com.example.pbo.HelloApplication;
+import com.example.pbo.interfaces.Kasir;
+import com.example.pbo.model.Kendaraan;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.paint.Paint;
-
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-public class TambahKendaraan implements Initializable {
+public class TambahKendaraan implements Initializable, Kasir {
     @FXML
     public TextField DateTime;
     @FXML
@@ -28,51 +32,116 @@ public class TambahKendaraan implements Initializable {
     @FXML
     public TextField JenisKendaraan;
     @FXML
-    private TableView<Pengemudi> tabelKendaraan;
+    private TableView<Kendaraan> tabelKendaraan;
     @FXML
-    private TableColumn<Pengemudi, String> col1;
+    private TableColumn<Kendaraan, String> col1;
     @FXML
-    private TableColumn<Pengemudi, String> col2;
+    private TableColumn<Kendaraan, String> col2;
     @FXML
-    private TableColumn<Pengemudi, String> col3;
+    private TableColumn<Kendaraan, String> col3;
     @FXML
-    private TableColumn<Transaksi, Integer> col4;
+    private TableColumn<Kendaraan, Integer> col4;
+    @FXML
+    private TableColumn<Kendaraan, Integer> col5;
 
     @FXML
     public Button btnTambah;
 
+    private Window mywindow;
 
-    public void ActionClickbtnTambah(ActionEvent event){
+    public void ActionClickbtnDasboard(ActionEvent event){
+        mywindow = btnTambah.getScene().getWindow();
+        Stage stage = (Stage) mywindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Dashboard.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 700, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setTitle("Dashboard");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @Override
+    public ResultSet getPengemudiByPlatNomor() {
         DatabaseConnection db = new DatabaseConnection();
         Connection connection = db.getConnection();
-        String sql = "INSERT INTO pengemudi (Plat, Start, Jenis, End) VALUES (?, ?, ?,?)";
-        DateTimePicker = new DatePicker();
-        LocalDate tanggal = DateTimePicker.getValue();
+        try {
+            String query1 = "Select * FROM Kendaraan WHERE plat='" + TambahPlatNomer.getText() + "'";
+            Statement statement1 = connection.createStatement();
+            ResultSet hasil = statement1.executeQuery(query1);
+            String jenis = "";
+            String start = "";
+            while (hasil.next()) {
+                jenis = hasil.getString("jenis");
+                start = hasil.getString("start");
+            }
+            return hasil;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void tambah_data() {
+        DatabaseConnection db = new DatabaseConnection();
+        Connection connection = db.getConnection();
         try{
+            String sql = "INSERT INTO kendaraan (plat, start, jenis, end, harga) VALUES (?, ?, ?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,TambahPlatNomer.getText());
-            statement.setString(2, tanggal.toString());
+            String plat = TambahPlatNomer.getText();
+            statement.setString(1,plat);
+            statement.setString(2, DateTimePicker.getValue().toString()+" "+LocalTime.now().toString());
             statement.setString(3,JenisKendaraan.getText());
             statement.setString(4, "-");
+            statement.setString(5, "0");
             statement.executeUpdate();
             TambahPlatNomer.setText("");
             DateTimePicker.setValue(null);
             JenisKendaraan.setText("");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informasi");
+            alert.setContentText("Data Berhasil Diinput!!");
+            alert.showAndWait();
         }catch(Exception e){
-            e.printStackTrace();
-            e.getCause();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText( e.getMessage());
+            alert.showAndWait();
         }
-
     }
+    public void ActionClickbtnTambah(ActionEvent event){
+        tambah_data();
+    }
+    public void read() {
+        ObservableList<Kendaraan> data = FXCollections.observableArrayList();
+        DatabaseConnection db = new DatabaseConnection();
+        Connection connection = db.getConnection();
+        String query = "select * from kendaraan";
+        try {
+            Statement statement =  connection.createStatement();
+            ResultSet output = statement.executeQuery(query);
+            while (output.next()){
+                data.add(new Kendaraan(output.getString("plat"),output.getString("jenis"),output.getString("start"),output.getInt("harga"),output.getString("end")));
+            }
+            col1.setCellValueFactory(new PropertyValueFactory<>("plat"));
+            col2.setCellValueFactory(new PropertyValueFactory<>("jenis"));
+            col3.setCellValueFactory(new  PropertyValueFactory<>("start"));
+            col4.setCellValueFactory(new PropertyValueFactory<>("end"));
+            col5.setCellValueFactory(new PropertyValueFactory<>("harga"));
 
+            tabelKendaraan.setItems(data);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//
-//        col1.setCellValueFactory(data -> data.getValue().idProperty().asObject());
-//        col2.setCellValueFactory(data -> data.getValue().nameProperty());
-//        col3.setCellValueFactory(data -> data.getValue().ageProperty().asObject());
-//        col4.setCellValueFactory(data -> data.getValue().nameProperty());
-//        col5.setCellValueFactory(data -> data.getValue().ageProperty().asObject());
-
+        read();
     }
+
 }
