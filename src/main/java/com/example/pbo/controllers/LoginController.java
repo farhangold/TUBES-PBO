@@ -1,5 +1,4 @@
 package com.example.pbo.controllers;
-
 import DatabaseConnection.DatabaseConnection;
 import com.example.pbo.HelloApplication;
 import javafx.event.ActionEvent;
@@ -72,3 +71,4 @@ public class LoginController implements Initializable {
         alert.showAndWait();
     }
 }
+

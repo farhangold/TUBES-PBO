@@ -4,6 +4,7 @@ module com.example.pbo {
     requires  java.sql;
     requires javafx.graphics;
     requires mysql.connector.j;
+    requires java.desktop;
 
 
     opens com.example.pbo to javafx.fxml;
