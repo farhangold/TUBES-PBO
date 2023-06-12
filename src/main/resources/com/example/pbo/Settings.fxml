@@ -18,11 +18,11 @@
                         </ImageView>
                     </children>
                 </StackPane>
-                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Dashboard">
+                <Button mnemonicParsing="false"  onAction="#ActionClickbtnDasboard" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Dashboard">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
-                <Button fx:id="btnKendaraan" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Tambah Kendaraan">
+                <Button fx:id="btnKendaraan" onAction="#actionClickBtnTambahKendaraan" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Tambah Kendaraan">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
@@ -30,17 +30,16 @@
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
-                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" style="-fx-background-color: Transparant;" text="Exit">
+                <Button mnemonicParsing="false" onAction="#btnclicklogout" prefHeight="26.0" prefWidth="179.0" style="-fx-background-color: Transparant;" text="Exit">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
             </children>
         </VBox>
-      <TextField fx:id="tfUsername" layoutX="300.0" layoutY="99.0" />
-      <Label layoutX="211.0" layoutY="103.0" text="Username" />
-      <Label layoutX="211.0" layoutY="150.0" text="Foto baru" />
-      <Button fx:id="btnPilihFoto" layoutX="300.0" layoutY="146.0" mnemonicParsing="false" text="Pilih Foto" />
-      <Button fx:id="btnSimpan" layoutX="496.0" layoutY="278.0" mnemonicParsing="false" text="Simpan" />
-      <Label fx:id="labelFoto" layoutX="305.0" layoutY="183.0" prefHeight="67.0" prefWidth="54.0"  />
+        <TextField fx:id="tfUsername" layoutX="300.0" layoutY="99.0" />
+        <Label layoutX="211.0" layoutY="103.0" text="Username" />
+        <PasswordField fx:id="tfPassword" layoutX="300.0" layoutY="130.0" />
+        <Label layoutX="211.0" layoutY="130.0" text="Password" />
+        <Button fx:id="btnSimpan" onAction="#updateData" layoutX="496.0" layoutY="200.0" mnemonicParsing="false" text="Simpan" />
     </children>
 </AnchorPane>

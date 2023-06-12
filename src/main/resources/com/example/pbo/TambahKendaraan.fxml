@@ -26,11 +26,11 @@
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
-                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: Transparant;" text="Setting">
+                <Button mnemonicParsing="false" onAction="#actionClickbtnSetting" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: Transparant;" text="Setting">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
-                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="179.0" style="-fx-background-color: Transparant;" text="Exit">
+                <Button mnemonicParsing="false" onAction="#btnclicklogout" prefHeight="26.0" prefWidth="179.0" style="-fx-background-color: Transparant;" text="Exit">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font></Button>
@@ -38,7 +38,7 @@
         </VBox>
         <Button fx:id="btnTambah" onAction="#ActionClickbtnTambah" layoutX="560.0" layoutY="71.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="Tambah" />
 
-        <Label layoutX="203.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Dashboard">
+        <Label layoutX="203.0" layoutY="24.0" style="-fx-font-weight: bold;" text="Tambah Kendaraan">
             <font>
                 <Font size="18.0" />
             </font>
