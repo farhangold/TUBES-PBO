@@ -2,6 +2,7 @@ package com.example.pbo.controllers;
 
 import DatabaseConnection.DatabaseConnection;
 import com.example.pbo.HelloApplication;
+import com.example.pbo.interfaces.Transaksi;
 import com.example.pbo.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,15 +19,13 @@ import javafx.stage.Window;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DashboardController implements Initializable{
+public class DashboardController implements Initializable, Transaksi {
     float harga = 0;
     Motor motor = new Motor();
     Mobil mobil = new Mobil();
@@ -87,55 +85,11 @@ public class DashboardController implements Initializable{
                 jenis = hasil.getString("jenis");
                 start = hasil.getString("start");
             }
-                String regexDay = "\\d{4}-\\d{2}-(\\d{2})";
-                String regex = "\\b\\d{2}(?=\\:\\d{2}\\:\\d{2}\\.\\d{9})";
-                Pattern pattern = Pattern.compile(regex);
-                Pattern patternday = Pattern.compile(regexDay);
-                Matcher matcherDay = patternday.matcher(start);
-                Matcher matcherDay2 = patternday.matcher(myend);
-                int day = 0;
-                if (matcherDay2.find()) {
-                    String day1 = matcherDay2.group(1);
-                    day += Integer.parseInt(day1);
-                }
-                if (matcherDay.find()) {
-                    String day1 = matcherDay.group(1);
-                    day -= Integer.parseInt(day1);
-                }
-
-                int hour = 0;
-
-                Matcher matcher2 = pattern.matcher(myend);
-                if (matcher2.find()) {
-                    String hour2 = matcher2.group();
-                    hour += Integer.parseInt(hour2);
-                }
-                Matcher matcher1 = pattern.matcher(start);
-                if (matcher1.find()) {
-                    String hour1 = matcher1.group();
-                    hour -= Integer.parseInt(hour1);
-                }
-            if(jenis.equals("Motor")){
-                harga = motor.getHargasat()*(hour+(day*24));
-                if(harga == 0){
-                    harga = motor.getHargasat();
-                }
-            } else if (jenis.equals("Mobil")) {
-                harga = mobil.getHarga()*(hour+(day*24));
-                if(harga == 0){
-                    harga = mobil.getHargasat();
-                }
-            }else if(jenis.equals("Truck")){
-                harga = truck.getHarga()*(hour+(day*24));
-                if(harga == 0){
-                    harga = truck.getHargasat();
-                }
-            }else{
-                harga = bus.getHarga()*(hour+(day*24));
-                if(harga == 0){
-                    harga = bus.getHargasat();
-                }
-            }
+            harga = total_bayar(jenis, start, myend);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Status");
+            alert.setContentText("Pembayaran "+Platnomer.getText()+" totalnya "+ harga);
+            alert.showAndWait();
         }catch (Exception e){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
@@ -173,6 +127,7 @@ public class DashboardController implements Initializable{
                 alert.showAndWait();
                 delete.close();
                 connection.close();
+                read();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -247,4 +202,59 @@ public class DashboardController implements Initializable{
             alert.showAndWait();
         }
     }
+
+    @Override
+    public float total_bayar(String jenis, String start, String myend) {
+        String regexDay = "\\d{4}-\\d{2}-(\\d{2})";
+        String regex = "\\b\\d{2}(?=\\:\\d{2}\\:\\d{2}\\.\\d{9})";
+        Pattern pattern = Pattern.compile(regex);
+        Pattern patternday = Pattern.compile(regexDay);
+        Matcher matcherDay = patternday.matcher(start);
+        Matcher matcherDay2 = patternday.matcher(myend);
+        int day = 0;
+        if (matcherDay2.find()) {
+            String day1 = matcherDay2.group(1);
+            day += Integer.parseInt(day1);
+        }
+        if (matcherDay.find()) {
+            String day1 = matcherDay.group(1);
+            day -= Integer.parseInt(day1);
+        }
+
+        int hour = 0;
+
+        Matcher matcher2 = pattern.matcher(myend);
+        if (matcher2.find()) {
+            String hour2 = matcher2.group();
+            hour += Integer.parseInt(hour2);
+        }
+        Matcher matcher1 = pattern.matcher(start);
+        if (matcher1.find()) {
+            String hour1 = matcher1.group();
+            hour -= Integer.parseInt(hour1);
+        }
+        if(jenis.equals("Motor")){
+            harga = motor.getHargasat()*(hour+(day*24));
+            if(harga == 0){
+                harga = motor.getHargasat();
+            }
+        } else if (jenis.equals("Mobil")) {
+            harga = mobil.getHarga()*(hour+(day*24));
+            if(harga == 0){
+                harga = mobil.getHargasat();
+            }
+        }else if(jenis.equals("Truck")){
+            harga = truck.getHarga()*(hour+(day*24));
+            if(harga == 0){
+                harga = truck.getHargasat();
+            }
+        }else{
+            harga = bus.getHarga()*(hour+(day*24));
+            if(harga == 0){
+                harga = bus.getHargasat();
+            }
+        }
+        return harga;
+    }
+
 }

@@ -106,11 +106,9 @@ public class TambahKendaraan implements Initializable, Kasir {
             alert.setTitle("Informasi");
             alert.setContentText("Data Berhasil Diinput!!");
             alert.showAndWait();
+            read();
         }catch(Exception e){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setContentText( e.getMessage());
-            alert.showAndWait();
+            updatekendaraan();
         }
     }
     public void ActionClickbtnTambah(ActionEvent event){
@@ -136,7 +134,37 @@ public class TambahKendaraan implements Initializable, Kasir {
             tabelKendaraan.setItems(data);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText( e.getMessage());
+            alert.showAndWait();
+        }
+    }
+    @Override
+    public void updatekendaraan(){
+        DatabaseConnection db = new DatabaseConnection();
+        Connection connection = db.getConnection();
+        try{
+            String query = "UPDATE Kendaraan SET start=?,end=?,harga= ? WHERE plat=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,DateTimePicker.getValue().toString()+" "+LocalTime.now().toString());
+            statement.setString(2,"-");
+            statement.setFloat(3, 0);
+            statement.setString(4, TambahPlatNomer.getText());
+            statement.executeUpdate();
+            read();
+            TambahPlatNomer.setText("");
+            DateTimePicker.setValue(null);
+            JenisKendaraan.setText("");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informasi");
+            alert.setContentText("Data Berhasil Diupdate!!");
+            alert.showAndWait();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setContentText( e.getMessage());
+            alert.showAndWait();
         }
     }
     @Override

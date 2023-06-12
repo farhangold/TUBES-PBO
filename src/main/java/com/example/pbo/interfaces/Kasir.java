@@ -8,4 +8,5 @@ public interface Kasir {
 
     public ResultSet getPengemudiByPlatNomor();
     public void tambah_data();
+    public void updatekendaraan();
 }
