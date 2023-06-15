@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pbo.controllers.SettingsController">
+    <children>
+        <VBox prefHeight="500.0" prefWidth="178.0" style="-fx-background-color: #596D64; -fx-border-radius: 10px; -fx-border-color: #ccc; -fx-border-width: 1px;">
+            <children>
+                <StackPane prefHeight="108.0" prefWidth="150.0">
+                    <children>
+                        <ImageView fitHeight="67.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@assets/avatar.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </StackPane>
+                <Button mnemonicParsing="false"  onAction="#ActionClickbtnDasboard" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Dashboard">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button fx:id="btnKendaraan" onAction="#actionClickBtnTambahKendaraan" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" style="-fx-background-color: Transparant;" text="Tambah Kendaraan">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="182.0" style="-fx-background-color: Transparant;" text="Setting">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+                <Button mnemonicParsing="false" onAction="#btnclicklogout" prefHeight="26.0" prefWidth="179.0" style="-fx-background-color: Transparant;" text="Exit">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font></Button>
+            </children>
+        </VBox>
+        <TextField fx:id="tfUsername" layoutX="300.0" layoutY="99.0" />
+        <Label layoutX="211.0" layoutY="103.0" text="Username" />
+        <PasswordField fx:id="tfPassword" layoutX="300.0" layoutY="130.0" />
+        <Label layoutX="211.0" layoutY="130.0" text="Password" />
+        <Button fx:id="btnSimpan" onAction="#updateData" layoutX="496.0" layoutY="200.0" mnemonicParsing="false" text="Simpan" />
+    </children>
+</AnchorPane>

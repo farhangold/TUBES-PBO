@@ -2,34 +2,37 @@ package com.example.pbo.model;
 
 import java.util.ArrayList;
 
-public class Kasir implements com.example.pbo.controllers.Kasir {
-    private String id_pekerja;
-    private ArrayList<Pengemudi> listparkir;
-    //Method
-    public Kasir(String id_pekerja) {
-        this.id_pekerja = id_pekerja;
+public class Kasir {
+    private String username;
+    private String password;
+    private String foto;
+
+    public Kasir(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public String getId_pekerja() {
-        return id_pekerja;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId_pekerja(String id_pekerja) {
-        this.id_pekerja = id_pekerja;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    @Override
-    public Pengemudi getPengemudiByPlatNomor() {
-        return null;
+    public String getPassword() {
+        return password;
     }
 
-    @Override
-    public double getTotalBayar(String plat, String jenisKendaraan) {
-        return 0;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @Override
-    public String getNoTransaksi(String notransaksi) {
-        return null;
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }

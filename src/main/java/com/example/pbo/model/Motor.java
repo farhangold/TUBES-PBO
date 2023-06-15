@@ -1,18 +1,17 @@
 package com.example.pbo.model;
 
 public class Motor extends Kendaraan {
+    private float hargasat = 2000;
 
-    public Motor(String nama) {
-        super(nama);
-        this.harga = 2000;
+    public  Motor(){
+
     }
 
-    @Override
-    public void setBerat(int berat) {
-        this.berat =berat;
+    public Motor(String plat, String jenis, String start, int harga, String end) {
+        super(plat, jenis, start, harga, end);
     }
-    @Override
-    public int getBerat() {
-        return this.berat;
+
+    public float getHargasat() {
+        return hargasat;
     }
 }
