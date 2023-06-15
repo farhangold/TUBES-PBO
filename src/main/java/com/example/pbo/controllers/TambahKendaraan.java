@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import java.io.IOException;
@@ -30,8 +31,6 @@ public class TambahKendaraan implements Initializable, Kasir {
     @FXML
     public DatePicker DateTimePicker;
     @FXML
-    public TextField JenisKendaraan;
-    @FXML
     private TableView<Kendaraan> tabelKendaraan;
     @FXML
     private TableColumn<Kendaraan, String> col1;
@@ -45,9 +44,12 @@ public class TambahKendaraan implements Initializable, Kasir {
     private TableColumn<Kendaraan, Integer> col5;
 
     @FXML
+    private ComboBox listJenis;
+    @FXML
     public Button btnTambah;
 
     private Window mywindow;
+    private ActionEvent event;
 
     public void ActionClickbtnDasboard(ActionEvent event){
         mywindow = btnTambah.getScene().getWindow();
@@ -63,7 +65,20 @@ public class TambahKendaraan implements Initializable, Kasir {
         stage.setScene(scene);
         stage.show();
     }
-
+    public void actionClickbtnSetting(ActionEvent event){
+        mywindow = TambahPlatNomer.getScene().getWindow();
+        Stage stage = (Stage) mywindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 700, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setTitle("Setting");
+        stage.setScene(scene);
+        stage.show();
+    }
     @Override
     public ResultSet getPengemudiByPlatNomor() {
         DatabaseConnection db = new DatabaseConnection();
@@ -95,19 +110,22 @@ public class TambahKendaraan implements Initializable, Kasir {
             String plat = TambahPlatNomer.getText();
             statement.setString(1,plat);
             statement.setString(2, DateTimePicker.getValue().toString()+" "+LocalTime.now().toString());
-            statement.setString(3,JenisKendaraan.getText());
+            statement.setString(3,listJenis.getValue().toString());
             statement.setString(4, "-");
             statement.setString(5, "0");
             statement.executeUpdate();
             TambahPlatNomer.setText("");
             DateTimePicker.setValue(null);
-            JenisKendaraan.setText("");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Informasi");
             alert.setContentText("Data Berhasil Diinput!!");
             alert.showAndWait();
             read();
         }catch(Exception e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informasi");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
             updatekendaraan();
         }
     }
@@ -155,7 +173,6 @@ public class TambahKendaraan implements Initializable, Kasir {
             read();
             TambahPlatNomer.setText("");
             DateTimePicker.setValue(null);
-            JenisKendaraan.setText("");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Informasi");
             alert.setContentText("Data Berhasil Diupdate!!");
@@ -170,6 +187,21 @@ public class TambahKendaraan implements Initializable, Kasir {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         read();
+        listJenis.setItems(FXCollections.observableArrayList("Motor","Mobil","Bus","Truck"));
     }
 
+    public void btnclicklogout(ActionEvent event){
+        mywindow = TambahPlatNomer.getScene().getWindow();
+        Stage stage = (Stage) mywindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 700, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setTitle("Setting");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

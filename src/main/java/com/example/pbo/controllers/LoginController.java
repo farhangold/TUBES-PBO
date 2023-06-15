@@ -29,10 +29,24 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
     public void btnLoginAction(ActionEvent actionEvent) {
-        if(tfUsername.getText().equals("")){
-            ouput.setText("Username harus di isi!");
-        }else if(tfPassword.getText().equals("")){
-            ouput.setText("Password harus di isi!");
+        if(tfUsername.getText().equals("")&&tfPassword.getText().equals("")){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Username dan password Harus Diisi!!");
+            alert.showAndWait();
+        }else if(tfUsername.getText().equals("")){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Username Harus Diisi!!");
+            alert.showAndWait();        }
+        else if(tfPassword.getText().equals("")){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Passowrd Harus Diisi!!");
+            alert.showAndWait();
         }else{
             validateLogin(actionEvent);
         }

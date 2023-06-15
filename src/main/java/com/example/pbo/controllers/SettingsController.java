@@ -1,9 +1,12 @@
 package com.example.pbo.controllers;
 
+import com.example.pbo.HelloApplication;
+import com.example.pbo.model.Kendaraan;
 import com.mysql.cj.Query;
 
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,11 +14,17 @@ import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import DatabaseConnection.DatabaseConnection;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import DatabaseConnection.DatabaseConnection;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -27,6 +36,8 @@ public class SettingsController implements Initializable {
     @FXML
     private TextField tfUsername;
     @FXML
+    private PasswordField tfPassword;
+    @FXML
     private Button btnPilihFoto;
     @FXML
     private Button btnSimpan;
@@ -34,63 +45,101 @@ public class SettingsController implements Initializable {
     @FXML
     private Label labelFoto;
 
+    @FXML
+    private Window mywindow;
     public void initialize(URL location, ResourceBundle resources) {
-        
+        setUsername();
     }
-    public void setBtnSimpan(ActionEvent actionEvent) {
-        updateData();
-        ouput.setText("Pergantian Username berhasil");
+
+    public void ActionClickbtnDasboard(ActionEvent event){
+        mywindow = tfUsername.getScene().getWindow();
+        Stage stage = (Stage) mywindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Dashboard.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 700, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setTitle("Dashboard");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void btnclicklogout(ActionEvent event){
+        mywindow = tfUsername.getScene().getWindow();
+        Stage stage = (Stage) mywindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 700, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setTitle("Setting");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void actionClickBtnTambahKendaraan(ActionEvent event){
+        mywindow = tfUsername.getScene().getWindow();
+        Stage stage = (Stage) mywindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("TambahKendaraan.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 700, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setTitle("Tambah Kendaraan");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void setUsername(){
+        DatabaseConnection db = new DatabaseConnection();
+        Connection connection = db.getConnection();
+        String username = "";
+        String password = "";
+        String query = "SELECT * FROM Kasir";
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                username = resultSet.getString("username");
+                password = resultSet.getString("password");
+            }
+            tfUsername.setText(username);
+            tfPassword.setText(password);
+        }catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informasi");
+            alert.setHeaderText("Status");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
     }
 
     public void updateData() {
         DatabaseConnection db = new DatabaseConnection();
         Connection connection = db.getConnection();
         String username = tfUsername.getText();
-        String query = "SELECT Username FROM kasir";
-        String updateQuery = "UPDATE kasir SET Username = ?";
+        String password = tfPassword.getText();
         try {
-            // Mengambil data dari database
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-
-            if (resultSet.next()) {
-                String currentUsername = resultSet.getString("Username");
-                tfUsername.setText(currentUsername);
-
-                // Update data di database
-                PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
-                updateStatement.setString(1, username);
-                int rowsAffected = updateStatement.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    System.out.println("Data berhasil diupdate.");
-                } else {
-                    System.out.println("Tidak ada data yang diupdate.");
-                }
-
-                updateStatement.close();
-            } else {
-                tfUsername.setText("Data tidak ditemukan");
-            }
-
-            resultSet.close();
-            statement.close();
+            String query = "UPDATE Kasir SET username=? , password = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,username);
+            statement.setString(2,password);
+            statement.executeUpdate();
+            tfUsername.setText(username);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informasi");
+            alert.setHeaderText("Status");
+            alert.setContentText("Update Username dan password berhasil");
+            alert.showAndWait();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    public void setBtnPilihFoto(ActionEvent actionEvent){
-        try{
-            JFileChooser chooser = new JFileChooser();
-            chooser.showOpenDialog(null);
-            File f = chooser.getSelectedFile();
-            ImageIcon icon = new ImageIcon(f.toString());
-            Image image = icon.getImage().getScaledInstance((int) labelFoto.getWidth(), (int) labelFoto.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon ic = new ImageIcon(image);
-        } catch(Exception e){
-            JOptionPane.showMessageDialog(null, "error Upload"+ e);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informasi");
+            alert.setHeaderText("Status");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 }

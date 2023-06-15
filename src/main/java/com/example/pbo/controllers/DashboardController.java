@@ -69,7 +69,34 @@ public class DashboardController implements Initializable, Transaksi {
         stage.setScene(scene);
         stage.show();
     }
-
+    public void actionClickBtnSetting(ActionEvent event){
+        mywindow = Platnomer.getScene().getWindow();
+        Stage stage = (Stage) mywindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 700, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setTitle("Setting");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void btnclicklogout(ActionEvent event){
+        mywindow = Platnomer.getScene().getWindow();
+        Stage stage = (Stage) mywindow;
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 700, 500);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.setTitle("Setting");
+        stage.setScene(scene);
+        stage.show();
+    }
     public void actionClickBtnCheckout(ActionEvent event){
         DatabaseConnection db = new DatabaseConnection();
         Connection connection = db.getConnection();
@@ -105,7 +132,11 @@ public class DashboardController implements Initializable, Transaksi {
             statement.executeUpdate();
             read();
         } catch (SQLException e) {
-            System.out.println("Terjadi kesalahan saat mengupdate data di database: " + e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informasi");
+            alert.setHeaderText("Status");
+            alert.setContentText("Terjadi kesalahan saat mengupdate data di database: "+e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -188,7 +219,7 @@ public class DashboardController implements Initializable, Transaksi {
                 alert.setHeaderText(Platnomer.getText()+" Ditemukan");
                 alert.setContentText( "Mulai Parkir: " + start.substring(0, 19));
                 alert.showAndWait();
-            } else {
+            }else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Informasi");
                 alert.setHeaderText(Platnomer.getText()+" Tidak Ditemuakan");
@@ -239,17 +270,17 @@ public class DashboardController implements Initializable, Transaksi {
                 harga = motor.getHargasat();
             }
         } else if (jenis.equals("Mobil")) {
-            harga = mobil.getHarga()*(hour+(day*24));
+            harga = mobil.getHargasat()*(hour+(day*24));
             if(harga == 0){
                 harga = mobil.getHargasat();
             }
         }else if(jenis.equals("Truck")){
-            harga = truck.getHarga()*(hour+(day*24));
+            harga = truck.getHargasat()*(hour+(day*24));
             if(harga == 0){
                 harga = truck.getHargasat();
             }
         }else{
-            harga = bus.getHarga()*(hour+(day*24));
+            harga = bus.getHargasat()*(hour+(day*24));
             if(harga == 0){
                 harga = bus.getHargasat();
             }
